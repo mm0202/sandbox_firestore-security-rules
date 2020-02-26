@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --forceExit --detectOpenHandles --maxWorkers=10",
+    "test": "jest --forceExit --detectOpenHandles --maxWorkers=1",
     "test-watch": "jest --watch",
     "emu:start:firestore": "firebase emulators:start --only firestore"
   },
@@ -12,9 +12,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@firebase/testing": "^0.16.6",
+    "@firebase/testing": "^0.15.1",
     "@types/jest": "^24.9.0",
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.7.2"
   },
   "jest": {
     "moduleFileExtensions": [

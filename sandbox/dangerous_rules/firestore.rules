@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    allow read, write: if false;
+
+    match /articles1/{article} {
+      // 全てのユーザの読み書きを許可
+      allow read, write: if true;
+    }
+
+    match /articles2/{article} {
+      // 全てのユーザの読み込みを許可
+      allow read: if true;
+      // 認証されたユーザのみ書き込みを許可
+      allow write: if request.auth.uid != null;
+    }
+
+    match /users1/{userId} {
+      // 認証されたユーザのみ読み書きを許可
+      allow read, write: if request.auth.uid != null;
+    }
+
+    match /users2/{userId} {
+      // ユーザ本人の読み書きを許可
+      allow read, write: if request.auth.uid == userId;
+    }
+
+    match /server_logs1/{log} {
+      // 全てのユーザの読み込みを許可
+      allow read: if true;
+    }
+
+    match /server_logs2/{log} {
+      // 全てのユーザの読み書きを拒否
+      allow read, write: if false;
+    }
+  }
+}
