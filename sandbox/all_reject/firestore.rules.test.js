@@ -24,7 +24,7 @@ function getFirestoreWithAuth() {
     return app.firestore();
 }
 
-describe("sandbox", () => {
+describe("全て拒否設定", () => {
     beforeEach(async () => {
         // セキュリティルールの読み込み
         await firebase.loadFirestoreRules({

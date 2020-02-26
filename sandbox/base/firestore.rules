@@ -1,0 +1,88 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 基本構成チェック
+    match /bases/{base} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // database変数チェック
+    match /variable_checks/{variable_check} {
+      allow read, write: if database == '(default)';
+    }
+
+    // ワイルドカードチェック
+    // #1 特定のドキュメントを指定
+    match /specific_docs/specific_doc1 {
+      allow read, write: if true;
+    }
+
+    // #2 ワイルドカードでfruitsコレクションの任意のドキュメントを指定
+    match /wildcard_checks/{wildcard_check} {
+      allow read, write: if true;
+    }
+
+    // ネスト記述チェック
+    match /nest_doc_roots/{nest_doc_root} {
+        match /nest_docs/{nest_doc} {
+          allow read, write: if true;
+        }
+    }
+
+    // 非ネスト記述チェック
+    match /no_nest_doc_roots/{no_nest_doc_root}/no_nest_docs/{no_nest_doc} {
+      allow read, write: if true;
+    }
+
+    // 再帰ワイルドカードチェック
+    match /re_wildcard_checks/{document=**} {
+      allow read, write: if true;
+    }
+
+    // 再帰ワイルドカードの変数チェック
+    match /re_wildcard_path_checks/{document=**} {
+      allow read, write: if document == "doc0/col1/doc2";
+    }
+
+    // read & write check
+    match /access_types1/{access_types} {
+      // ドキュメントの取得を許可
+      allow read: if true;
+
+      // ドキュメントの追加・更新・削除を許可
+      allow write: if true;
+    }
+
+    // get, list check
+    match /access_types2/{access_types} {
+      // 単一ドキュメントの取得を許可
+      allow get: if true;
+
+      // 複数ドキュメント(クエリやコレクション)の取得を許可
+      allow list: if true;
+    }
+
+    // create, update, delete check
+    match /access_types2/{access_types2} {
+      // 新規ドキュメントの追加を許可
+      allow create: if true;
+
+      // 既存ドキュメントの更新を許可
+      allow update: if true;
+
+      // ドキュメントの削除を許可
+      allow delete: if true;
+    }
+
+    // 複数条件一致は許可優先
+    match /multi_match/{multi_match} {
+      allow read, write: if true;
+    }
+
+    match /multi_match/{multi_match} {
+      allow read, write: if false;
+    }
+  }
+}
+
