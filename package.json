@@ -1,0 +1,25 @@
+{
+  "name": "sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test-watch": "jest --watch",
+    "emu:start:firestore": "firebase emulators:start --only firestore"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@firebase/testing": "^0.16.6",
+    "@types/jest": "^24.9.0",
+    "jest": "^24.9.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "rules"
+    ]
+  }
+}
