@@ -1,4 +1,3 @@
-// エミュレータホストの指定。デフォルトポートの場合は不要。
 process.env.FIRESTORE_EMULATOR_HOST = "localhost:58080";
 
 import {FirestoreEmulatorClient} from "@mm0202/firestore-client";
@@ -13,7 +12,6 @@ describe("fruitsコレクションへの認証付きでのアクセスのみを�
     });
 
     afterEach(async () => {
-        // 使用したアプリの削除
         await client.cleanup()
     });
 
