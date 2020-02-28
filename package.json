@@ -17,6 +17,6 @@
     "jest": "^24.9.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.7.2",
-    "@mm0202/firestore-client": "^0.0.3"
+    "@mm0202/firestore-client": "^0.0.6"
   }
 }

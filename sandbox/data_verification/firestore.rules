@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /item/{item_id}{
+      allow create: if request.auth.uid == request.resource.data.admin_user;
+
+      allow update: if request.auth.uid == request.resource.data.admin_user 
+                        && request.resource.data.admin_user == resource.data.admin_user
+                        && request.resource.data.title == resource.data.title
+                        && resource.data.locked == false;
+
+      allow read: if request.auth.uid != null
+                      && resource.data.sold_out == false;
+    }
+  }
+}
