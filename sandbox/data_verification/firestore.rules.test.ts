@@ -1,11 +1,12 @@
 process.env.FIRESTORE_EMULATOR_HOST = "localhost:58080";
 
-import {FirestoreEmulatorClient} from "@mm0202/firestore-client";
+import {FirestoreTestSupporter} from "firestore-test-supporter";
+
 import path from "path";
 import * as firebase from "@firebase/testing";
 
 describe("データ検証", () => {
-    const client = new FirestoreEmulatorClient("my-test-project", path.join(__dirname, "firestore.rules"));
+    const client = new FirestoreTestSupporter("my-test-project", path.join(__dirname, "firestore.rules"));
     const collectionPath = "item";
     const item_id = "XXXXXXXXXX";
 
